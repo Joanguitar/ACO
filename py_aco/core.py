@@ -1,5 +1,9 @@
 import numpy as np
 
+##### DESCRIPTION #####
+# This part of the module handles the mathematic
+# formulation for channel coefficients estimation
+
 # Compute the first and second coefficients of the fft considering that the third one is 0
 def get_fft_01(rss):                         # Vector with the 4 rrs-like values corresponding to the required measurements [paper]
     n_nan = sum(np.isnan(rss))               # Number of NaNs in rss (maximum of 1)

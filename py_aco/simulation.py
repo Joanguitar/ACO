@@ -1,5 +1,11 @@
 import numpy as np
 
+##### DESCRIPTION #####
+# This part of the module provides for
+# tools in case you want to do simulations
+# It's not fully developed yet, but I'll
+# try to implement more channel models
+
 class Channel(object):
     """
     Base class for channel.

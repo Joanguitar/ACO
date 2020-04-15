@@ -13,7 +13,7 @@ class ACO_low(object):
         self.n_antennas = n_antennas
         self.maximum_bps = maximum_bps
         self.initial_codebook = [
-            [codebook.get_phased_coef(a) for a in bp]
+            np.array([codebook.get_phased_coef(a) for a in bp])
             for bp in np.fft.fft(np.eye(n_antennas))
         ]
         # Flow control
@@ -29,15 +29,21 @@ class ACO_low(object):
         return codebook.get_codebook(self.bp, self.antenna_index)
 
     def set_antenna_index(self):
-        active_antennas = np.where(self.bp != 0)
-        inactive_antennas = np.where(self.bp == 0)
-        n_search_antennas = np.floor(
+        active_antennas = np.argwhere(self.bp != 0)[:, 0]
+        if 1+3*len(active_antennas) >= self.maximum_bps:
+            self.antenna_index = active_antennas[:int(np.floor((self.maximum_bps-1)/3))]
+            return
+        inactive_antennas = np.argwhere(self.bp[:] == 0)[:, 0]
+        n_search_antennas = int(np.floor(
             (self.maximum_bps-(1+3*len(active_antennas)))/4
-        )
+        ))
+        if n_search_antennas == 0:
+            self.antenna_index = active_antennas
+            return
         if n_search_antennas > len(inactive_antennas):
             self.antenna_index = np.arange(self.n_antennas)
             return
-        search_antennas = np.random.choose(inactive_antennas, n_search_antennas)
+        search_antennas = np.random.choice(inactive_antennas, n_search_antennas)
         self.antenna_index = np.concatenate((active_antennas, search_antennas))
 
     def get_winner_bp(self, rss):

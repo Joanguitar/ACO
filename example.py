@@ -10,7 +10,7 @@ ACO = py_aco.method.ACO_low(n_antennas)
 
 communication_power = []
 channel_estimation_error = []
-for iter in range(10):
+for iter in range(20):
     codebook = ACO.get_codebook()
     rss = channel.measure_rss(codebook)
     bp = ACO.get_winner_bp(rss)
@@ -19,19 +19,23 @@ for iter in range(10):
     bp_power = np.square(np.abs(
         np.dot(channel.channel, np.conj(bp))
     ))
-    if len(estimated_channel) > 0:
-        estimation_error = np.sqrt(np.maximum(
-            np.sum(np.square(np.abs(channel.channel))) +
-            np.sum(np.square(np.abs(estimated_channel))) -
-            2*np.abs(np.dot(channel.channel, np.conj(estimated_channel)))
-            , 0)
-        )
-    else:
-        estimation_error = -1
+    estimation_error = np.sqrt(np.maximum(
+        np.sum(np.square(np.abs(channel.channel))) +
+        np.sum(np.square(np.abs(estimated_channel))) -
+        2*np.abs(np.dot(channel.channel, np.conj(estimated_channel)))
+        , 0)
+    )
     communication_power.append(bp_power)
     channel_estimation_error.append(estimation_error)
 
-plt.plot(communication_power)
-plt.plot(channel_estimation_error)
+fig = plt.figure()
+ax1 = fig.add_subplot(2, 1, 1)
+ax2 = fig.add_subplot(2, 1, 2)
+ax1.plot(communication_power)
+ax2.plot(channel_estimation_error)
 
 estimated_channel = ACO.channel
+
+#plt.plot(np.abs(estimated_channel))
+len(codebook)
+len(ACO.antenna_index)

@@ -10,7 +10,7 @@ def get_fft_01(rss):                         # Vector with the 4 rrs-like values
     if n_nan > 1:                            # If there's more than 1, return a NaN
         return np.nan
     if n_nan == 1:
-        ii = np.where(np.isnan(rss))[0]      # If there's only one, then solve it using that the third coefficient
+        ii = np.argwhere(np.isnan(rss))[0]   # If there's only one, then solve it using that the third coefficient
         fft_3_coefs = np.array([1, -1, 1, -1])
         if ii%2 == 0:
             rss[ii] = -np.nansum(rss*fft_3_coefs)

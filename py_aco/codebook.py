@@ -5,7 +5,6 @@ from . import core
 # This part of the module handles the
 # beam-pattern design and usage in the estimation
 
-
 # Create a codebook for estimating the channel coefficients corresponding to some given antennas
 def get_codebook(bp_ref, antenna_index):                  # bp_ref is the reference beam-pattern, antenna_index is the index of the antenna
     possible_coefs = [1, 1j, -1, -1j]

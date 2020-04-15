@@ -46,3 +46,25 @@ def get_subchannel(bp_ref, antenna_index, rss):           # bp_ref is the refere
                     rss_4coef.append(rss_copy.pop(0))     # then get the measured value from the list
             channel.append(core.get_coef_on(rss_4coef, np.angle(coef_0))) # Get that antenna channel coefficient and append it to the computed subchannnel
     return channel
+
+# Round a number to the closest possible coefficient (1, 1j, -1 or -1j)
+def get_phased_coef(a):                                   # a is the number we want to approax
+    a_re = np.real(a)                                     # Real part
+    a_im = np.imag(a)                                     # Real part
+    if abs(a_im) > abs(a_re):                             # If the imaginary part is stronger, then it's closer to the imaginary axis
+        return np.sign(a_im)*1j                           # Assign the sign of the imaginary axis
+    else:                                                 # If the real part is stronger, then it's closer to the real axis
+        return np.sign(a_re)                              # Assign the sign of the real axis
+
+# Compute the beam-pattern described by the paper for analog beam-forming
+def get_winner_bp(channel):                               # channel is the measured channel, note that it can be a subchannnel
+    bp = np.zeros_like(channel)                           # Initialize the beam-pattern to zeros
+    channel_abs = np.abs(channel)                         # Compute the amplitude of each channel coefficient
+    I = np.argsort(channel_abs)[::-1]                     # Get the strongest antenna indices
+    max_term = np.cumsum(                                 # Compute the term described in the paper for deciding the number of on antennas
+        [channel_abs[ii] for ii in I]
+    )/np.sqrt(np.arange(1, 1+len(channel)))               # \frac{sum_ii^k |a_ii|}{\sqrt{k}}
+    n_active = np.argmax(max_term)+1                      # Compute the number of active antennas that maximizes previous expression
+    for ii in I[:n_active]:                               # Set the n_active strongest antennas on
+        bp[ii] = get_phased_coef(channel[ii])             # Assign it the closest possible coefficient to the corresponding channel coefficient
+    return bp

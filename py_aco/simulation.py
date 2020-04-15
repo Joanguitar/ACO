@@ -8,13 +8,14 @@ class Channel(object):
 
 # Initialize the channel to have a given number of antennas and an SNR
     def __init__(self, n_antennas, snr=3):
-        super(, self).__init__()
+        super().__init__()
         self.n_antennas = n_antennas
-        self.snr = 3
+        self.snr = snr
         self.channel = self.get_channel() # Each channel model needs to have this function defined to update the channel
 
 # Function to get the noise that applies of the measured complex_gain, can be overwritten to not have AWGN
     def get_noise(self, n_samples):
+        noise_std = np.power(10, -self.snr/20)                 # We compute the noise std, it's divided by 20 because we want amplitude instead of power
         noise = (
             np.random.randn(n_samples) +
             np.random.randn(n_samples)*1j
@@ -23,8 +24,7 @@ class Channel(object):
 
 # Function that simulates the rss measure
     def measure_rss(self, codebook):
-        complex_gains = np.dot(codebook, self.channel)         # Complex gains is computed as the scalar product between a beam-pattern and the channel
-        noise_std = np.pow(10, -self.snr/20)                   # We compute the noise std, it's divided by 20 because we want amplitude instead of power
+        complex_gains = np.dot(codebook, np.conj(self.channel))         # Complex gains is computed as the scalar product between a beam-pattern and the channel
         complex_gains += self.get_noise(len(complex_gains))    # Add complex white Gaussian noise
         rss = np.square(np.abs(complex_gains))                 # Compute the rss as the squared absolute value
         return rss
@@ -35,11 +35,11 @@ class RandomChannel(Channel):
     Gaussian randomly generated channel
     """
 
-    def __init__(self, *args):
-        super(RandomChannel, self).__init__(*args)
+    def __init__(self, *args, **kwargs):
+        super(RandomChannel, self).__init__(*args, **kwargs)
 
 # Function to get the channel
-    def get_channel():
+    def get_channel(self):
         channel = (                                            # Channel as random complex i.i.d. Gaussian
             np.random.randn(self.n_antennas) +
             1j*np.random.randn(self.n_antennas)

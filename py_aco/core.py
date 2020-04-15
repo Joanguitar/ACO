@@ -38,3 +38,4 @@ def get_coef_on(rss, phase_0):               # Vector with the 4 rrs-like values
     phase = np.angle(fft_1)                  # This time we compute the phase to later correct it
     amplitude_0 = (top + bot)/2              # The amplitude of the array response of all the other antennas is the middle point between top and bot
     phase -= np.angle(amplitude_0 + amplitude*np.exp((phase + phase_0)*1j)) # Phase correction described in the paper
+    return amplitude*np.exp(1j*phase)

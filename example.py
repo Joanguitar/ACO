@@ -4,7 +4,7 @@ import py_aco
 n_antennas = 4
 my_channel = py_aco.simulation.RandomChannel(n_antennas, snr=1000000)
 
-bp_ref = [3, 0, 1j, 1]
+bp_ref = [1, 0, 1j, 1]
 my_channel.channel = bp_ref.copy()
 
 my_channel.channel[1] += 0.5j

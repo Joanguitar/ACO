@@ -17,8 +17,8 @@ for iter in range(4):                                                   # At eve
     rss = channel.measure_rss(codebook)                                 # You measure the codebook and get the RSS values (or proportional to RSS) in a vector, if there's any missing value you must fill it with a np.nan
     bp = ACO.get_winner_bp(rss)                                         # This function will give you the winner beam-pattern for communication and prepare next step's codebook for estimation
 
-I = np.arange(n_antennas)
-codebook = py_aco.codebook.get_codebook(bp, I)
+I = np.arange(n_antennas)                                               # Select all antennas because we want to get the whole channel
+codebook = py_aco.codebook.get_codebook(bp, I)                          # Get the required codebook for the estimation
 
 # if your codebook is bigger that the maximum length allowed, split it into batches
 if len(codebook) > maximum_bps:
@@ -32,7 +32,7 @@ if len(codebook) > maximum_bps:
 else:
     rss = channel.measure_rss(codebook)
 
-estimated_channel = py_aco.codebook.get_subchannel(bp, I, rss)
+estimated_channel = py_aco.codebook.get_subchannel(bp, I, rss)          # Get the channel from the measurements
 
 # Solution analysis
 estimation_error = np.sqrt(np.maximum(                                  # Compute the cordal complex error

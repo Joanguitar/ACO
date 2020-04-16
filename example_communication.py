@@ -3,7 +3,7 @@ import py_aco
 import matplotlib.pyplot as plt
 
 # Parameters definition
-n_antennas = 64
+n_antennas = 32
 channel = py_aco.simulation.RandomChannel(n_antennas, snr=10)           # This is a simulation example, substitute this channel with your devices interface
 # Note: the SNR above is the virtual SNR of the measurement after applying filters, not the communication one
 

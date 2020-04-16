@@ -8,7 +8,7 @@ from . import core
 # Create a codebook for estimating the channel coefficients corresponding to some given antennas
 def get_codebook(bp_ref, antenna_index):                  # bp_ref is the reference beam-pattern, antenna_index is the index of the antenna
     possible_coefs = [1, 1j, -1, -1j]
-    bp_copy = bp_ref.copy()                               # Create a copy of the reference beam-pattern
+    bp_copy = bp_ref.copy().astype('complex')             # Create a copy of the reference beam-pattern
     codebook = [bp_ref]                                   # Initialize the cobeboos to that beam-pattern
     for ii_antenna in antenna_index:                      # Generate the set of beam-patterns for computing each antenna
         if bp_ref[ii_antenna] == 0:                       # Design from when the antenna is off

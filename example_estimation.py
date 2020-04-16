@@ -33,3 +33,13 @@ else:
     rss = channel.measure_rss(codebook)
 
 estimated_channel = py_aco.codebook.get_subchannel(bp, I, rss)
+
+# Solution analysis
+estimation_error = np.sqrt(np.maximum(                                  # Compute the cordal complex error
+    np.sum(np.square(np.abs(channel.channel))) +
+    np.sum(np.square(np.abs(estimated_channel))) -
+    2*np.abs(np.dot(channel.channel, np.conj(estimated_channel)))
+    , 0)
+)
+print('The total chordal complex error for the simulated channel is: {:3.5f}'.format(estimation_error))
+print('That accounts for {:3.1}% of the total channel'.format(estimation_error/np.linalg.norm(channel.channel)))

@@ -2,7 +2,7 @@
 Adaptive Codebook Optimization
 
 ## Use for communication
-Here's an [example](ACO/example_communication.py).
+Here's an [example](/ACO/example_communication.py).
 
 For communication you can simply load the method as
 ```python
@@ -13,7 +13,7 @@ ACO = py_aco.method.ACO_low(n_antennas, maximum_bps=maximum_bps)
 ```
 Here, `n_antennas` and `maximum_bps` are the number of antennas elements of the device's array and the maximum number of beam-patterns for the codebook.
 For each iteration you can ask the method for the codebook to measure like `codebook = ACO.get_codebook()`.
-You will then have to measure the RSS of each beam-pattern in the codebook and store those variables into a variable `rss` like in this [example](ACO/example_communication.py).
+You will then have to measure the RSS of each beam-pattern in the codebook and store those variables into a variable `rss` like in this [example](/ACO/example_communication.py).
 In the example, the device is substituted by a simulation, but you should be able to easily design a pipeline.
 Then the result is fed to the method like `bp = ACO.get_winner_bp(rss)` which also returns the winner beam-pattern for communication.
 
@@ -23,7 +23,7 @@ As an additional feature, you can extract the estimated channel that's been used
 To do so, after getting the beam-pattern you can add `estimated_channel = ACO.get_channel()` to get it. Note that the channel estimation is incomplete as the channel may not have been computed entirely due to the limit imposed by the maximum length of the codebook.
 
 ## Channel estimation
-Here's an [example](ACO/example_estimation.py).
+Here's an [example](/ACO/example_estimation.py).
 
 If instead of communication you're interested in channel estimation but you only have RSS or RSS related (like SNR) measurements you can also apply this method for channel estimation.
 

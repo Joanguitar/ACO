@@ -2,6 +2,8 @@
 Adaptive Codebook Optimization
 
 ## Use for communication
+Here's an [example](ACO/example_communication.py).
+
 For communication you can simply load the method as
 ```python
 import py_aco
@@ -21,6 +23,8 @@ As an additional feature, you can extract the estimated channel that's been used
 To do so, after getting the beam-pattern you can add `estimated_channel = ACO.get_channel()` to get it. Note that the channel estimation is incomplete as the channel may not have been computed entirely due to the limit imposed by the maximum length of the codebook.
 
 ## Channel estimation
+Here's an [example](ACO/example_estimation.py).
+
 If instead of communication you're interested in channel estimation but you only have RSS or RSS related (like SNR) measurements you can also apply this method for channel estimation.
 
 First thing you'll need to do is to get a "good" beam-pattern for communication.

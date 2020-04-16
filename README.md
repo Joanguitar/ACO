@@ -31,3 +31,7 @@ If your codebook is too large to load in your device there's no need to panic, y
 After measuring this codebook and storing the measured RSS values in the variable `rss`, you can get the subchannel corresponding to the antenna indices `I` as `estimated_subchannel = py_aco.codebook.get_subchannel(winner_bp, I, rss)`.
 
 Note that we've been using subchannel because you may be interested only in a subset of antennas, but if that's not your case you can still use `I = np.arange(n_antennas)` to get the whole channel.
+
+## Contributing
+This code relies on the idea that you have access to a device capable of measuring RSS.
+If you have a tool to measure with a specific device, please contact me and I'll be pleased to link your repo from mine.

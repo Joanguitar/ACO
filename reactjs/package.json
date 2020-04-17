@@ -1,5 +1,6 @@
 {
   "name": "reactjs",
+  "homepage": "https://joanguitar.github.io/ACO",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -34,7 +34,31 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-
+        <h1 align="center">
+          Adaptive Codebook Optimization
+        </h1>
+        <Row>
+          <Col lg="12">
+            <Card>
+              <CardHeader>
+                <CardTitle>
+                  <h3 align="center">
+                    Channel estimation from measurements
+                  </h3>
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <Row>
+                  <Col md="6">
+                    <h4 align="center">
+                      The problem
+                    </h4>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     );
   }

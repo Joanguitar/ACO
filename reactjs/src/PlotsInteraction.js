@@ -30,12 +30,19 @@ import Slider from '@material-ui/core/Slider';
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
+import ClockPlot from './functions/ClockPlot.js'
+
 class PlotsInteraction extends React.Component {
   render() {
     return(
       <Row>
-        <Col md="4">
-          TEST
+        <Col md="5">
+          <ClockPlot points={[{x: 0, y: 1}, {x: 0.2, y: 0.2}]} />
+        </Col>
+        <Col md="7">
+          <Row>
+            
+          </Row>
         </Col>
       </Row>
     )

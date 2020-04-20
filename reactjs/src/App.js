@@ -54,6 +54,11 @@ class App extends React.Component {
                       The problem
                     </h4>
                   </Col>
+                  <Col md="6">
+                    <h4 align="center">
+                      Observation
+                    </h4>
+                  </Col>
                 </Row>
               </CardBody>
             </Card>

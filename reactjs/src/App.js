@@ -31,6 +31,7 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import PlotsInteraction from "./PlotsInteraction.js"
+import PlotsOnOff from "./PlotsOnOff.js"
 
 class App extends React.Component {
   render() {
@@ -184,6 +185,7 @@ class App extends React.Component {
                     </p>
                   </Col>
                 </Row>
+                <PlotsOnOff />
               </CardBody>
             </Card>
           </Col>

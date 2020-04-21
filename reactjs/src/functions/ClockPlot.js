@@ -9,6 +9,8 @@ function filter_int(value) {
 
 const circle = range(-pi, pi, 0.01).map(ang => {return({x: Math.cos(ang), y: Math.sin(ang)})}).toArray();
 
+const colors = ["#000000", "#1f8ef1"]
+
 class ClockPlot extends React.Component {
   render() {
     return(
@@ -21,9 +23,10 @@ class ClockPlot extends React.Component {
           datasets: [
             ...this.props.points.map((item, iter) => {return({
               label: 'radius'+iter,
+              fill: false,
               showLine: true,
               lineTension: 0,
-              borderColor: "#1f8ef1",
+              borderColor: colors[iter%colors.length],
               borderWidth: 5,
               borderDash: [],
               borderDashOffset: 0.0,

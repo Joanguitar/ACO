@@ -44,13 +44,13 @@ class App extends React.Component {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  <h3 align="center">
-                    Channel estimation from measurements
-                  </h3>
                   <p>
                     This webpage's purpose is helping understanding the logic behind our channel estimation method.
                     You can also find more information in the paper and Github repository.
                   </p>
+                  <h2 align="center">
+                    Channel estimation from measurements
+                  </h2>
                   <p align="right">
                     <a href="http://eprints.networks.imdea.org/1880/">Paper</a>
                   </p>
@@ -155,6 +155,35 @@ class App extends React.Component {
                   And we have a channel (or sub-channel) estimation.
                   The choice of a subchannel depends on the will to reduce the number of required measurements.
                 </p>
+                <h2 align="center">
+                  From channel estimation to beam-forming
+                </h2>
+                <p>
+                  The next mission for the algorithm is to decide how to do the beam-forming with the channel estimation and the coefficient restrictions.
+                </p>
+                <Row>
+                  <Col md="6">
+                    <h4 align="center">
+                      Phase
+                    </h4>
+                    <p>
+                      We have to remember that the phase of the beam-pattern coefficients is restricted.
+                      The easy solution to account for this quantization is to simply round to the closest value.
+                      We take this approach not because it's the best, but because it's simple and it's out of the paper's scope.
+                      There's an extense research on quantized beam-forming that can be used for this.
+                    </p>
+                  </Col>
+                  <Col md="6">
+                    <h4 align="center">
+                      On or off?
+                    </h4>
+                    <p>
+                      As for the phase, we are considering a simple strategy.
+                      This strategy consists on optimizing assuming that the phase is unconstrained.
+                      In the paper we prove this optimization's solution to be to switch on the strongest <InlineMath math="N" /> antennas that maximize <InlineMath math="\frac{\sum_{k=1}^N|a_k|}{\sqrt{N}}" />, where <InlineMath math="a_k" /> is the channel coefficient corresponding to the k-th strongest antenna.
+                    </p>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </Col>

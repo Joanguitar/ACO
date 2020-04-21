@@ -39,13 +39,33 @@ class PlotsInteraction extends React.Component {
     super(props)
     this.state = {
       amplitudes: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+      th: 0.5
     }
     this.angle_domain = range(0, 2*pi, 0.01);
   }
-  handle_amplitude = (event, amplitude) => {
-    const amplitudes = this.state.amplitudes
+  handle_amplitude = (amplitude, iter) => {
+    var amplitudes = this.state.amplitudes
+    amplitudes[iter] = amplitude
+
+    const sorted_amplitudes = amplitudes.slice().sort(function(a, b){return b-a})
+    var sorted_amplitudes_cumsum = []
+    sorted_amplitudes.reduce(function(a,b,i) { return sorted_amplitudes_cumsum[i] = a+b; },0);
+    var term = sorted_amplitudes_cumsum.map((item, iter) => item/sqrt(iter+1))
+
+    var ii_term = 0
+    var max_term = 0
+    term.forEach((item, i) => {
+      if(item > max_term) {
+        max_term = item;
+        ii_term = i
+      }
+    });
+
+    const th = sorted_amplitudes[ii_term];
+
     this.setState({
       amplitudes: amplitudes,
+      th: th,
     })
   }
   render() {
@@ -60,15 +80,26 @@ class PlotsInteraction extends React.Component {
               {
                 datasets: [
                   {
-                    label: 'RSS',
-                    showLine: true,
+                    label: 'On',
+                    showLine: false,
                     lineTension: 0.1,
-                    borderColor: "#1f8ef1",
+                    borderColor: "#1ffe11",
                     borderWidth: 5,
                     borderDash: [],
                     borderDashOffset: 0.0,
                     pointRadius: 4,
-                    data: this.state.amplitudes.map((item, iter) => {return({x: iter, y: item})}),
+                    data: this.state.amplitudes.map((item, iter) => {return((item >= this.state.th && {x: iter, y: item}))}),
+                  },
+                  {
+                    label: 'Off',
+                    showLine: false,
+                    lineTension: 0.1,
+                    borderColor: "#ff1e11",
+                    borderWidth: 5,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    pointRadius: 4,
+                    data: this.state.amplitudes.map((item, iter) => {return((item < this.state.th && {x: iter, y: item}))}),
                   }
                 ]
               }
@@ -112,7 +143,7 @@ class PlotsInteraction extends React.Component {
                     ticks: {
                       enabled: false,
                       min: 0,
-                      max: this.state.amplitudes.length-1,
+                      max: this.state.amplitudes.length-0.9,
                       fontColor: "#9a9a9a",
                       callback: () => {}
                     }
@@ -130,9 +161,8 @@ class PlotsInteraction extends React.Component {
               {'Antenna ' + (iter+1)}
             </FormLabel>
             <Slider
-              id={iter}
               value={item}
-              onChange={this.handle_amplitude}
+              onChange={(event, value) => this.handle_amplitude(value, iter)}
               aria-labelledby="continuous-slider"
               valueLabelDisplay="auto"
               min={0}

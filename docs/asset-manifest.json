@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/ACO/static/css/main.89b56f32.chunk.css",
+    "main.js": "/ACO/static/js/main.01d632c0.chunk.js",
+    "main.js.map": "/ACO/static/js/main.01d632c0.chunk.js.map",
+    "runtime-main.js": "/ACO/static/js/runtime-main.9153a810.js",
+    "runtime-main.js.map": "/ACO/static/js/runtime-main.9153a810.js.map",
+    "static/css/2.8d375f9b.chunk.css": "/ACO/static/css/2.8d375f9b.chunk.css",
+    "static/js/2.fac4c85e.chunk.js": "/ACO/static/js/2.fac4c85e.chunk.js",
+    "static/js/2.fac4c85e.chunk.js.map": "/ACO/static/js/2.fac4c85e.chunk.js.map",
+    "index.html": "/ACO/index.html",
+    "precache-manifest.48fc49eecd2fe64bfc7e087ba72c9abc.js": "/ACO/precache-manifest.48fc49eecd2fe64bfc7e087ba72c9abc.js",
+    "service-worker.js": "/ACO/service-worker.js",
+    "static/css/2.8d375f9b.chunk.css.map": "/ACO/static/css/2.8d375f9b.chunk.css.map",
+    "static/css/main.89b56f32.chunk.css.map": "/ACO/static/css/main.89b56f32.chunk.css.map",
+    "static/js/2.fac4c85e.chunk.js.LICENSE.txt": "/ACO/static/js/2.fac4c85e.chunk.js.LICENSE.txt",
+    "static/media/katex.min.css": "/ACO/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
+    "static/media/nucleo-icons.css": "/ACO/static/media/nucleo.f0b489a5.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9153a810.js",
+    "static/css/2.8d375f9b.chunk.css",
+    "static/js/2.fac4c85e.chunk.js",
+    "static/css/main.89b56f32.chunk.css",
+    "static/js/main.01d632c0.chunk.js"
+  ]
+}

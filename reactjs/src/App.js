@@ -161,15 +161,13 @@ class App extends React.Component {
                 </h2>
                 <p>
                   The next mission for the algorithm is to decide how to do the beam-forming with the channel estimation and the coefficient restrictions.
+                  Note that the optimal unconstrained beam-pattern is the one proportional to the channel.
                 </p>
                 <Row>
                   <Col md="6">
                     <h4 align="center">
                       Phase
                     </h4>
-                    <p>
-                      The optimal unconstrained phase is the one corresponding that antenna's channel coefficient.
-                    </p>
                     <p>
                       We have to remember that the phase of the beam-pattern coefficients is restricted.
                       The easy solution to account for this quantization is to simply round to the closest value.
@@ -193,8 +191,52 @@ class App extends React.Component {
                 </h4>
                 <p>
                   Above you have an interactive graph that lets you experiment with the On/Off criteria.
-                  By increasing the power on different antennas you can see how the algorithm decides to turn them on (green) or off (red).
+                  By increasing the coefficient amplitude on different antennas you can see how the algorithm decides to turn them on (green) or off (red).
                 </p>
+                <h2 align="center">
+                  The method
+                </h2>
+                <Row>
+                  <Col md="3">
+                    <h4 align="center">
+                      Bootstrap
+                    </h4>
+                    <p>
+                      Method's first iteration consists on an exhaustive serach to find an initial good beam-pattern for communication.
+                      This step is not repeated anymore after this initial selection.
+                    </p>
+                  </Col>
+                  <Col md="3">
+                    <h4 align="center">
+                      Antenna selection
+                    </h4>
+                    <p>
+                      To reduce the channel estimation complexity we estimate only the subchannel corresponding to a set of selected antennas.
+                      These antennas are chosen such that the number of beam-patterns in the codebook doesn't exceed a limit.
+                      The selection is divided in 2 sets: active antennas and search antennas.
+                      The active antennas are those that were used by the beam-pattern for communication.
+                      The search antennas are antennas that were not used by the beam-pattern for communication but we selected at random to fulfill the maximum codebook length.
+                    </p>
+                  </Col>
+                  <Col md="3">
+                    <h4 align="center">
+                      Codebook
+                    </h4>
+                    <p>
+                      The codebook is built according the the last beam-pattern that was good for communication and the antenna selection.
+                      This codebook contains all the required beam-patterns to compute each antenna's channel coefficient while using the last beam-pattern for communication as reference beam-pattern.
+                      The number of elements in the codebook is given by <InlineMath math="1+N_{\bf{active}}+N_{\bf{search}}" />
+                    </p>
+                  </Col>
+                  <Col md="3">
+                    <h4 align="center">
+                      Beam-pattern for communication
+                    </h4>
+                    <p>
+                      Once the channel has been estimated we compute the beam-pattern for communication as described above.
+                    </p>
+                  </Col>
+                </Row>
               </CardBody>
             </Card>
           </Col>

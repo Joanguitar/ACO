@@ -188,6 +188,13 @@ class App extends React.Component {
                   </Col>
                 </Row>
                 <PlotsOnOff />
+                <h4 align="center">
+                  On/Off Plot
+                </h4>
+                <p>
+                  Above you have an interactive graph that lets you experiment with the On/Off criteria.
+                  By increasing the power on different antennas you can see how the algorithm decides to turn them on (green) or off (red).
+                </p>
               </CardBody>
             </Card>
           </Col>

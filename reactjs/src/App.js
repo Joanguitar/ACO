@@ -168,10 +168,12 @@ class App extends React.Component {
                       Phase
                     </h4>
                     <p>
+                      The optimal unconstrained phase is the one corresponding that antenna's channel coefficient.
+                    </p>
+                    <p>
                       We have to remember that the phase of the beam-pattern coefficients is restricted.
                       The easy solution to account for this quantization is to simply round to the closest value.
                       We take this approach not because it's the best, but because it's simple and it's out of the paper's scope.
-                      There's an extense research on quantized beam-forming that can be used for this.
                     </p>
                   </Col>
                   <Col md="6">

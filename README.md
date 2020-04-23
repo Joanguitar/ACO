@@ -3,6 +3,8 @@ Adaptive Codebook Optimization
 
 ["Joan Palacios, Daniel Steinmetzer, Adrian Loch, Matthias Hollick, and Joerg Widmer. 2018. Adaptive Codebook Optimization for Beam Training on Off-The-Shelf IEEE 802.11ad Devices. In Proceedings of the 24th ACM Annual International Conference on Mobile Computing and Networking."](http://eprints.networks.imdea.org/1880/)
 
+#### [Demo](https://joanguitar.github.io/ACO/)
+
 ## Use for communication
 Here's an [example](example_communication.py).
 
